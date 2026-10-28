@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "brutalizr"
+version = "0.1.0"
+description = "Renames the identifiers in your code with swear words (PHP, Python, JS, TS, Java, C#)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = ["tree-sitter>=0.25", "tree-sitter-language-pack>=0.9"]
+
+[project.scripts]
+brutalizr = "brutalizr.cli:main"
+
+[tool.setuptools]
+packages = ["brutalizr"]
