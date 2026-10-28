@@ -50,7 +50,7 @@ def main():
         orig = tmp / "orig"
         shutil.copytree(FIX, orig)
         expected = run_dir(orig)
-        for lang in ("it", "en", "es", "mix"):
+        for lang in ("it", "en", "es", "fr", "de", "nap", "mix"):
             for seed in (1, 2, 3):
                 dst = tmp / f"out-{lang}-{seed}"
                 rep = Brutalizer(orig, lang=lang, seed=seed).run(dst)

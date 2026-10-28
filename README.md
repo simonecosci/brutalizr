@@ -11,7 +11,7 @@
   <a href="#docker"><img src="https://img.shields.io/badge/docker-ready-2496ED?logo=docker&logoColor=white" alt="Docker ready"></a>
   <img src="https://img.shields.io/badge/parser-tree--sitter-4c9a2a" alt="tree-sitter">
   <img src="https://img.shields.io/badge/languages-PHP%20%7C%20Python%20%7C%20JS%20%7C%20TS%20%7C%20Java%20%7C%20C%23-ff5f56" alt="Languages">
-  <img src="https://img.shields.io/badge/swearing-it%20%7C%20en%20%7C%20es-ffa657" alt="Vocabularies: it, en, es">
+  <img src="https://img.shields.io/badge/swearing-it%20%7C%20en%20%7C%20es%20%7C%20fr%20%7C%20de%20%7C%20nap-ffa657" alt="Vocabularies: it, en, es, fr, de, nap">
   <a href="https://github.com/simonecosci/brutalizr/commits/main"><img src="https://img.shields.io/github/last-commit/simonecosci/brutalizr" alt="Last commit"></a>
 </p>
 
@@ -75,7 +75,7 @@ PowerShell: use `-v "${PWD}:/work"`. `--in-place` asks for confirmation, so add 
 ```bash
 brutalizr ./my-project                    # writes to ./my-project-brutalized
 brutalizr ./my-project -o /tmp/filth      # custom destination
-brutalizr ./my-project -l en              # English swear words (it, en, es, mix)
+brutalizr ./my-project -l en              # English swear words (it, en, es, fr, de, nap, mix)
 brutalizr ./my-project -s 42              # same names on every run
 brutalizr ./my-project -n -v              # dry run: show the map, write nothing
 brutalizr ./my-project --in-place         # overwrite the sources (asks for confirmation)
@@ -109,8 +109,11 @@ and comments are never touched. Two passes over the whole project:
    (`import`, `use`, `require` of non-local packages).
 2. **Replacement.** Every occurrence of a declared name becomes its swear word, which
    keeps the original style: `camelCase`, `PascalCase`, `snake_case`, `UPPER_SNAKE`,
-   `_`/`$`/`#` prefixes. Italian and Spanish adjectives agree in gender with the noun
-   (`minchiaLurida`, `cazzoMoscio`).
+   `_`/`$`/`#` prefixes. Adjectives agree with the noun's gender (`minchiaLurida`,
+   `poubelleVisqueuse`, `VersiffterArsch`, `BloedeSau`, `RanzigesArschloch`).
+
+Vocabularies: Italian (`it`, default), English (`en`), Spanish (`es`), French (`fr`),
+German (`de`), Neapolitan (`nap`), or all of them shuffled (`mix`).
 
 The vocabularies hold hundreds of nouns and adjectives per language (tens of thousands
 of two-word combinations, millions with three), so even projects with thousands of

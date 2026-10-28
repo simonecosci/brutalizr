@@ -24,7 +24,7 @@ def parse_args(argv=None):
     p.add_argument("--in-place", action="store_true",
                    help="modify the files in the source folder (DESTRUCTIVE)")
     p.add_argument("-y", "--yes", action="store_true", help="do not ask for confirmation")
-    p.add_argument("-l", "--lang", choices=["it", "en", "es", "mix"], default="it",
+    p.add_argument("-l", "--lang", choices=["it", "en", "es", "fr", "de", "nap", "mix"], default="it",
                    help="swear word vocabulary (default: it)")
     p.add_argument("-s", "--seed", type=int, help="seed to always get the same names")
     p.add_argument("-k", "--keep", action="append", default=[],
