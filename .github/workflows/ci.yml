@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+      - run: npm install -g typescript
+      - run: pip install -e .
+      - run: python3 tests/check.py
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t brutalizr .
+      - name: Smoke test
+        run: |
+          docker run --rm -v "$PWD/tests/fixtures:/work/src:ro" -v "$RUNNER_TEMP:/work/out" \
+            brutalizr src -o out/brutal -l en -s 1
+          test -f "$RUNNER_TEMP/brutal/py/pipeline.py"

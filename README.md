@@ -1,5 +1,20 @@
 # brutalizr
 
+<p align="center">
+  <img src="docs/banner.svg" alt="brutalizr: a Python class before and after, every identifier replaced with a swear word" width="100%">
+</p>
+
+<p align="center">
+  <a href="https://github.com/simonecosci/brutalizr/actions/workflows/ci.yml"><img src="https://github.com/simonecosci/brutalizr/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <img src="https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white" alt="Python 3.10+">
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/simonecosci/brutalizr" alt="License: MIT"></a>
+  <a href="#docker"><img src="https://img.shields.io/badge/docker-ready-2496ED?logo=docker&logoColor=white" alt="Docker ready"></a>
+  <img src="https://img.shields.io/badge/parser-tree--sitter-4c9a2a" alt="tree-sitter">
+  <img src="https://img.shields.io/badge/languages-PHP%20%7C%20Python%20%7C%20JS%20%7C%20TS%20%7C%20Java%20%7C%20C%23-ff5f56" alt="Languages">
+  <img src="https://img.shields.io/badge/swearing-it%20%7C%20en%20%7C%20es-ffa657" alt="Vocabularies: it, en, es">
+  <a href="https://github.com/simonecosci/brutalizr/commits/main"><img src="https://img.shields.io/github/last-commit/simonecosci/brutalizr" alt="Last commit"></a>
+</p>
+
 Takes a project's source folder and renames variables, functions, methods, constants,
 classes, interfaces, enums and parameters with swear words. The code becomes offensive
 to read but, as far as possible, **it stays the same program**: every name is replaced
@@ -32,6 +47,28 @@ pipx install ./brutalizr        # or: pip install ./brutalizr
 
 Requires Python ≥ 3.10. Language grammars ship with `tree-sitter-language-pack`,
 nothing else to install.
+
+## Docker
+
+No Python needed: build the image once, then mount the folder that contains your project
+on `/work`. Paths given to `brutalizr` are relative to that folder.
+
+```bash
+git clone https://github.com/simonecosci/brutalizr.git
+docker build -t brutalizr ./brutalizr
+
+# from the folder that contains my-project → writes ./my-project-brutalized
+docker run --rm -v "$PWD:/work" brutalizr my-project -l en
+
+# keep host file ownership on Linux/macOS
+docker run --rm -u "$(id -u):$(id -g)" -v "$PWD:/work" brutalizr my-project
+
+# dry run, full map
+docker run --rm -v "$PWD:/work" brutalizr my-project -n -v
+```
+
+PowerShell: use `-v "${PWD}:/work"`. `--in-place` asks for confirmation, so add `-it`
+(or pass `-y`). Without arguments the container prints the help.
 
 ## Usage
 
