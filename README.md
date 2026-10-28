@@ -160,3 +160,11 @@ Brutalizes the sample sources in `tests/fixtures` (one per language) with every
 vocabulary and three seeds, runs both original and result (`python3`, `node`,
 `tsc --strict`, `php`, `javac`/`java`; syntax check only for C#) and checks that the
 output is identical and that `--reverse` restores the sources byte for byte.
+
+## Contributing
+
+Issues and pull requests are welcome: see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## License
+
+[MIT](LICENSE) © Simone Cosci

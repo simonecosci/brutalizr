@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="t d">
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1170" viewBox="0 0 1280 1170" role="img" aria-labelledby="t d">
   <title id="t">brutalizr</title>
   <desc id="d">A Python class before and after brutalizr: every identifier is replaced with a swear word, the code still runs.</desc>
   <defs>
@@ -12,69 +12,70 @@
     </linearGradient>
     <style>
       .sans { font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
-      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size: 14px; fill: #e6edf3; white-space: pre; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size: 25px; fill: #e6edf3; }
       .kw { fill: #ff7b72; }
       .num { fill: #79c0ff; }
       .fn { fill: #d2a8ff; }
       .id { fill: #a5d6ff; }
       .bad { fill: #ffa657; font-weight: 700; }
-      .dim { fill: #8b949e; }
+      .label { font-size: 17px; font-weight: 600; fill: #8b949e; }
       .chip { fill: #21262d; stroke: #30363d; }
-      .chipt { font-size: 15px; fill: #c9d1d9; font-weight: 600; }
+      .chipt { font-size: 18px; fill: #c9d1d9; font-weight: 600; }
     </style>
   </defs>
 
-  <rect width="1280" height="640" fill="url(#bg)"/>
+  <rect width="1280" height="1170" fill="url(#bg)"/>
 
-  <text x="640" y="98" text-anchor="middle" class="sans" font-size="76" font-weight="900" fill="url(#title)" letter-spacing="-2">brutalizr</text>
-  <text x="640" y="146" text-anchor="middle" class="sans" font-size="22" fill="#c9d1d9">Rename every identifier in your codebase with swear words. It still runs.</text>
+  <text x="640" y="112" text-anchor="middle" class="sans" font-size="92" font-weight="900" fill="url(#title)" letter-spacing="-3">brutalizr</text>
+  <text x="640" y="168" text-anchor="middle" class="sans" font-size="29" fill="#c9d1d9">Rename every identifier in your codebase with swear words. It still runs.</text>
+
+  <!-- languages -->
+  <g class="sans" transform="translate(0 200)">
+    <rect x="238" y="0" width="72" height="44" rx="22" class="chip"/><text x="274" y="28" text-anchor="middle" class="chipt">PHP</text>
+    <rect x="324" y="0" width="100" height="44" rx="22" class="chip"/><text x="374" y="28" text-anchor="middle" class="chipt">Python</text>
+    <rect x="438" y="0" width="136" height="44" rx="22" class="chip"/><text x="506" y="28" text-anchor="middle" class="chipt">JavaScript</text>
+    <rect x="588" y="0" width="136" height="44" rx="22" class="chip"/><text x="656" y="28" text-anchor="middle" class="chipt">TypeScript</text>
+    <rect x="738" y="0" width="82" height="44" rx="22" class="chip"/><text x="779" y="28" text-anchor="middle" class="chipt">Java</text>
+    <rect x="834" y="0" width="64" height="44" rx="22" class="chip"/><text x="866" y="28" text-anchor="middle" class="chipt">C#</text>
+    <rect x="912" y="0" width="130" height="44" rx="22" fill="#ff5f56" fill-opacity=".15" stroke="#ff5f56"/><text x="977" y="28" text-anchor="middle" class="chipt" fill="#ffa657">it · en · es</text>
+  </g>
 
   <!-- before -->
-  <g transform="translate(40 190)">
-    <rect width="580" height="300" rx="12" fill="#161b22" stroke="#30363d"/>
-    <path d="M0 12a12 12 0 0 1 12-12h556a12 12 0 0 1 12 12v24H0z" fill="#21262d"/>
-    <circle cx="22" cy="18" r="6" fill="#ff5f56"/><circle cx="42" cy="18" r="6" fill="#ffbd2e"/><circle cx="62" cy="18" r="6" fill="#27c93f"/>
-    <text x="290" y="23" text-anchor="middle" class="sans dim" font-size="13">pipeline.py</text>
-    <g class="mono" xml:space="preserve">
-      <text x="20" y="66"><tspan class="id">MAX_RETRIES</tspan> = <tspan class="num">3</tspan></text>
-      <text x="20" y="114"><tspan class="kw">class</tspan> <tspan class="fn">DataPipeline</tspan>:</text>
-      <text x="20" y="138">&#160;&#160;&#160;&#160;<tspan class="kw">def</tspan> <tspan class="fn">__init__</tspan>(self, <tspan class="id">source_name</tspan>, <tspan class="id">batch_size</tspan>=<tspan class="num">100</tspan>):</text>
-      <text x="20" y="162">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.<tspan class="id">source_name</tspan> = <tspan class="id">source_name</tspan></text>
-      <text x="20" y="186">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.<tspan class="id">batch_size</tspan> = <tspan class="id">batch_size</tspan></text>
-      <text x="20" y="234">&#160;&#160;&#160;&#160;<tspan class="kw">def</tspan> <tspan class="fn">summary</tspan>(self):</text>
-      <text x="20" y="258">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<tspan class="id">started_at</tspan> = datetime.now() - timedelta(minutes=<tspan class="num">5</tspan>)</text>
+  <g transform="translate(40 290)">
+    <rect width="1200" height="384" rx="14" fill="#161b22" stroke="#30363d"/>
+    <path d="M0 14a14 14 0 0 1 14-14h1172a14 14 0 0 1 14 14v34H0z" fill="#21262d"/>
+    <circle cx="26" cy="24" r="7" fill="#ff5f56"/><circle cx="50" cy="24" r="7" fill="#ffbd2e"/><circle cx="74" cy="24" r="7" fill="#27c93f"/>
+    <text x="600" y="30" text-anchor="middle" class="sans label">pipeline.py</text>
+    <g class="mono">
+      <text x="32" y="96"><tspan class="id">MAX_RETRIES</tspan> = <tspan class="num">3</tspan></text>
+      <text x="32" y="172"><tspan class="kw">class</tspan> <tspan class="fn">DataPipeline</tspan>:</text>
+      <text x="32" y="210">&#160;&#160;&#160;&#160;<tspan class="kw">def</tspan> <tspan class="fn">__init__</tspan>(self, <tspan class="id">source_name</tspan>, <tspan class="id">batch_size</tspan>=<tspan class="num">100</tspan>):</text>
+      <text x="32" y="248">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.<tspan class="id">source_name</tspan> = <tspan class="id">source_name</tspan></text>
+      <text x="32" y="286">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.<tspan class="id">batch_size</tspan> = <tspan class="id">batch_size</tspan></text>
+      <text x="32" y="324">&#160;&#160;&#160;&#160;<tspan class="kw">def</tspan> <tspan class="fn">summary</tspan>(self):</text>
+      <text x="32" y="362">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<tspan class="id">started_at</tspan> = datetime.now() - timedelta(minutes=<tspan class="num">5</tspan>)</text>
     </g>
   </g>
 
   <!-- arrow -->
-  <circle cx="640" cy="340" r="17" fill="#ff5f56"/>
-  <path d="M633 340h12m-5-6 6 6-6 6" stroke="#0d1117" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="640" cy="712" r="24" fill="#ff5f56"/>
+  <path d="M640 700v24m-9-9 9 9 9-9" stroke="#0d1117" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="680" y="719" class="sans" font-size="20" font-weight="700" fill="#ffa657">brutalizr . -l it</text>
 
   <!-- after -->
-  <g transform="translate(660 190)">
-    <rect width="580" height="300" rx="12" fill="#161b22" stroke="#ff5f56" stroke-opacity=".6"/>
-    <path d="M0 12a12 12 0 0 1 12-12h556a12 12 0 0 1 12 12v24H0z" fill="#21262d"/>
-    <circle cx="22" cy="18" r="6" fill="#ff5f56"/><circle cx="42" cy="18" r="6" fill="#ffbd2e"/><circle cx="62" cy="18" r="6" fill="#27c93f"/>
-    <text x="290" y="23" text-anchor="middle" class="sans dim" font-size="13">pipeline.py · brutalized</text>
-    <g class="mono" xml:space="preserve">
-      <text x="20" y="66"><tspan class="bad">MAIALONE_RIMBAMBITO</tspan> = <tspan class="num">3</tspan></text>
-      <text x="20" y="114"><tspan class="kw">class</tspan> <tspan class="bad">CacasottoUnticcio</tspan>:</text>
-      <text x="20" y="138">&#160;&#160;&#160;&#160;<tspan class="kw">def</tspan> <tspan class="fn">__init__</tspan>(self, <tspan class="bad">sfigato_incazzoso</tspan>, <tspan class="bad">coglione_fetido</tspan>=<tspan class="num">100</tspan>):</text>
-      <text x="20" y="162">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.<tspan class="bad">sfigato_incazzoso</tspan> = <tspan class="bad">sfigato_incazzoso</tspan></text>
-      <text x="20" y="186">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.<tspan class="bad">coglione_fetido</tspan> = <tspan class="bad">coglione_fetido</tspan></text>
-      <text x="20" y="234">&#160;&#160;&#160;&#160;<tspan class="kw">def</tspan> <tspan class="bad">lordura_sfasciata</tspan>(self):</text>
-      <text x="20" y="258">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<tspan class="bad">lordura_moscia</tspan> = datetime.now() - timedelta(minutes=<tspan class="num">5</tspan>)</text>
+  <g transform="translate(40 750)">
+    <rect width="1200" height="384" rx="14" fill="#161b22" stroke="#ff5f56" stroke-opacity=".6"/>
+    <path d="M0 14a14 14 0 0 1 14-14h1172a14 14 0 0 1 14 14v34H0z" fill="#21262d"/>
+    <circle cx="26" cy="24" r="7" fill="#ff5f56"/><circle cx="50" cy="24" r="7" fill="#ffbd2e"/><circle cx="74" cy="24" r="7" fill="#27c93f"/>
+    <text x="600" y="30" text-anchor="middle" class="sans label">pipeline.py · brutalized</text>
+    <g class="mono">
+      <text x="32" y="96"><tspan class="bad">MAIALONE_RIMBAMBITO</tspan> = <tspan class="num">3</tspan></text>
+      <text x="32" y="172"><tspan class="kw">class</tspan> <tspan class="bad">CacasottoUnticcio</tspan>:</text>
+      <text x="32" y="210">&#160;&#160;&#160;&#160;<tspan class="kw">def</tspan> <tspan class="fn">__init__</tspan>(self, <tspan class="bad">sfigato_incazzoso</tspan>, <tspan class="bad">coglione_fetido</tspan>=<tspan class="num">100</tspan>):</text>
+      <text x="32" y="248">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.<tspan class="bad">sfigato_incazzoso</tspan> = <tspan class="bad">sfigato_incazzoso</tspan></text>
+      <text x="32" y="286">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;self.<tspan class="bad">coglione_fetido</tspan> = <tspan class="bad">coglione_fetido</tspan></text>
+      <text x="32" y="324">&#160;&#160;&#160;&#160;<tspan class="kw">def</tspan> <tspan class="bad">lordura_sfasciata</tspan>(self):</text>
+      <text x="32" y="362">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<tspan class="bad">lordura_moscia</tspan> = datetime.now() - timedelta(minutes=<tspan class="num">5</tspan>)</text>
     </g>
-  </g>
-
-  <!-- languages -->
-  <g class="sans" transform="translate(0 540)">
-    <rect x="270" y="0" width="70" height="36" rx="18" class="chip"/><text x="305" y="24" text-anchor="middle" class="chipt">PHP</text>
-    <rect x="352" y="0" width="94" height="36" rx="18" class="chip"/><text x="399" y="24" text-anchor="middle" class="chipt">Python</text>
-    <rect x="458" y="0" width="122" height="36" rx="18" class="chip"/><text x="519" y="24" text-anchor="middle" class="chipt">JavaScript</text>
-    <rect x="592" y="0" width="122" height="36" rx="18" class="chip"/><text x="653" y="24" text-anchor="middle" class="chipt">TypeScript</text>
-    <rect x="726" y="0" width="76" height="36" rx="18" class="chip"/><text x="764" y="24" text-anchor="middle" class="chipt">Java</text>
-    <rect x="814" y="0" width="60" height="36" rx="18" class="chip"/><text x="844" y="24" text-anchor="middle" class="chipt">C#</text>
-    <rect x="886" y="0" width="124" height="36" rx="18" fill="#ff5f56" fill-opacity=".15" stroke="#ff5f56"/><text x="948" y="24" text-anchor="middle" class="chipt" fill="#ffa657">it · en · es</text>
   </g>
 </svg>
