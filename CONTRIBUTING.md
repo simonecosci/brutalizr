@@ -60,12 +60,15 @@ Vocabularies live in `brutalizr/words.py`.
 
 - Entries must be lowercase ASCII (`[a-z_]`): they become identifiers, so no
   accents or `ñ`. A `_` splits an entry into separate words (`piss_poor`).
-- Italian and Spanish nouns carry a gender (`"m"` / `"f"`); adjectives are written in
-  the masculine form and get `-o` → `-a` automatically for feminine nouns.
+- Nouns carry a gender (`"m"`, `"f"`, and `"n"` for German). Adjectives are written in
+  the masculine form and inflected by the vocabulary's `inflect` function (default:
+  `-o` → `-a`; French and German have their own rules). When the rule gets a word
+  wrong, write both forms as `masc/fem` (`damne/damnee`, `stuorto/storta`).
 - No duplicates within a list.
 - Keep it to generic profanity: no slurs targeting people for who they are.
 
-A new vocabulary language is a new key in `VOCAB` (with `order`, `nouns`, `adjs`)
+A new vocabulary language is a new key in `VOCAB` (with `order`, `nouns`, `adjs` and,
+if needed, `inflect`)
 plus the `--lang` choices in `cli.py`.
 
 ## Adding or improving a programming language

@@ -21,7 +21,7 @@ docker build -t brutalizr . && docker run --rm -v "$PWD:/work" brutalizr <dir>  
 
 CI (`.github/workflows/ci.yml`) runs `tests/check.py` with the full toolchain, plus a Docker build and smoke test.
 
-There is no linter or unit test framework. `tests/check.py` is the only test: it brutalizes `tests/fixtures` (one small program per language) with every vocabulary (`it`, `en`, `es`, `mix`) × seeds 1-3. It runs both the original and the brutalized program and requires identical stdout. It then applies the inverted map and requires the original sources back byte for byte. It needs `python3`, `node`, `tsc`, `php`, `javac` and `java` on PATH. C# is only syntax-checked with tree-sitter. It has no filter for a single language: to iterate on one language, run the CLI on that fixture folder with `-n -v`.
+There is no linter or unit test framework. `tests/check.py` is the only test: it brutalizes `tests/fixtures` (one small program per language) with every vocabulary (`it`, `en`, `es`, `fr`, `de`, `nap`, `mix`) × seeds 1-3. It runs both the original and the brutalized program and requires identical stdout. It then applies the inverted map and requires the original sources back byte for byte. It needs `python3`, `node`, `tsc`, `php`, `javac` and `java` on PATH. C# is only syntax-checked with tree-sitter. It has no filter for a single language: to iterate on one language, run the CLI on that fixture folder with `-n -v`.
 
 `tests/fixtures/php/vendor/stubs.php` stands in for an external library. `vendor` is in `DEFAULT_EXCLUDES`, so the test copies it back into each output dir by hand.
 
@@ -51,9 +51,9 @@ The key idea is **name families**. Python, PHP, JS/TS/TSX (shared), Java and C# 
 To support a new language or construct, extend these tables first and touch the engine only if a tree shape can't be expressed through them. `BY_EXT` maps file extensions to specs.
 
 **`words.py`**:
-- `VOCAB` holds the per-language nouns (with gender) and adjectives, plus word order (`noun-adj` for it/es, `adj-noun` for en). Feminine nouns turn adjectives ending in `-o` into `-a`.
+- `VOCAB` holds the per-language nouns (with gender) and adjectives, plus word order (`noun-adj` for it/es/fr/nap, `adj-noun` for en/de). Adjectives agree through the vocabulary's `inflect` (default `-o`→`-a`; `_fr` and `_de` with German m/f/n strong endings); a `masc/fem` entry gives both forms explicitly.
 - `NameForge.forge` keeps the original's style (`camel`/`Pascal`/`snake`/`UPPER`, leading and trailing `_`). Names that are all lowercase get the spec's `lower_default`. It never returns a name already in `used` (seeded with every existing identifier in the project). When collisions persist it makes phrases longer and, as a last resort, adds a numeric suffix.
-- Vocabulary entries must be lowercase ASCII (`[a-z_]`), because they become identifiers. `_` splits a single entry into several words.
+- Vocabulary entries must be lowercase ASCII (`[a-z_]`, plus one `/` for explicit forms), because they become identifiers. `_` splits a single entry into several words.
 
 ## Known limits (by design, see README)
 

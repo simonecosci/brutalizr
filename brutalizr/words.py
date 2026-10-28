@@ -9,7 +9,31 @@ def _g(gender: str, words: str) -> list[tuple[str, str]]:
     return [(w, gender) for w in words.split()]
 
 
-# (word, gender) — 'f' = feminine, adjectives are inflected to agree (o -> a)
+def _o_to_a(adj: str, gender: str) -> str:
+    return adj[:-1] + "a" if gender == "f" and adj.endswith("o") else adj
+
+
+_FR_FEM = (("e", "e"), ("eux", "euse"), ("if", "ive"), ("on", "onne"), ("el", "elle"),
+           ("ul", "ulle"), ("en", "enne"), ("er", "ere"), ("", "e"))
+
+
+def _fr(adj: str, gender: str) -> str:
+    if gender != "f":
+        return adj
+    for masc, fem in _FR_FEM:
+        if adj.endswith(masc):
+            return adj[:len(adj) - len(masc)] + fem
+
+
+def _de(adj: str, gender: str) -> str:
+    # strong declension (no article): -er / -e / -es
+    ending = {"m": "er", "f": "e", "n": "es"}[gender]
+    return adj + (ending[1:] if adj.endswith("e") else ending)
+
+
+# nouns are (word, gender): 'm', 'f' or 'n'; adjectives are inflected to agree with the
+# vocabulary's "inflect" (default: Italian-style o -> a). "masc/fem" gives both forms
+# explicitly, for words the rule would get wrong.
 VOCAB = {
     "it": {
         "order": "noun-adj",
@@ -153,6 +177,126 @@ VOCAB = {
             pinche culero mamerto atontado alelado amuermado empalmado
         """.split(),
     },
+    "fr": {
+        "order": "noun-adj",
+        "inflect": _fr,
+        "nouns": _g("m", """
+            con connard enfoire salaud salopard batard abruti cretin debile idiot
+            imbecile cornichon couillon trouduc emmerdeur branleur glandeur minable
+            naze pignouf plouc beauf bouffon guignol tocard ringard boulet blaireau
+            cafard cancrelat morpion pou rat porc cochon goret veau ane dindon
+            crapaud merdier bordel foutoir gachis bousin caca pipi pet rot prout
+            crachat mollard vomi degueulis etron colombin furoncle bouton cul trou
+            slip calecon fumier purin egout cloaque taudis bouge clebs cabot gland
+            baltringue bouseux charlot zigoto nigaud benet dadais gugusse pitre
+            sagouin malotru mufle goujat rustre butor lourdaud pochtron poivrot
+            soulard ivrogne morveux
+        """) + _g("f", """
+            merde chiasse crotte bouse fiente pisse gerbe morve vomissure connerie
+            couillonnade saloperie cochonnerie merdouille daube bouillie puree
+            ordure raclure pourriture vermine charogne punaise blatte tique puce
+            limace larve nouille andouille buse bourrique truie vache carne bique
+            teigne peste plaie galere foirade bourde boulette gaffe bavure arnaque
+            embrouille chierie poubelle fosse latrine chiotte tinette flaque crasse
+            mouise deche poisse cata catastrophe bouffonnerie tache cruche gourde
+            patate courge banane quiche tanche cloche
+        """),
+        "adjs": """
+            pourri moisi rance crade cradingue degueulasse sale puant merdique
+            foireux chiant emmerdant gonflant lourd nul foutu maudit damne/damnee
+            satane/satanee bourre/bourree defonce/defoncee pete/petee crame/cramee
+            cuit rassis/rassie gerbant ecoeurant immonde infect ignoble miteux
+            pouilleux galeux teigneux crasseux poisseux gluant visqueux baveux
+            merdeux boiteux bancal branlant tordu bossele/bosselee cabosse/cabossee
+            rouille/rouillee ebreche/ebrechee fele/felee troue/trouee
+            dechire/dechiree rapiece/rapiecee pathetique lamentable navrant bete
+            stupide demeure/demeuree paume/paumee largue/larguee flasque laid moche
+            affreux hideux difforme bossu chauve edente/edentee pele/pelee
+            rachitique malade tare/taree timbre/timbree cingle/cinglee
+            siphonne/siphonnee glauque louche vereux vicieux sournois fourbe lache
+            feignant faineant mollasson grognon radin pingre pourave vaseux fumeux
+            creve/crevee nique/niquee bousille/bousillee flingue/flinguee
+            encule/enculee deglingue/deglinguee esquinte/esquintee amoche/amochee
+            rabougri ratatine/ratatinee ramolli abime/abimee bouffi
+            boursoufle/boursouflee merdouilleux putride fetide nauseabond
+            faisande/faisandee avarie/avariee perime/perimee
+        """.split(),
+    },
+    "de": {
+        "order": "adj-noun",
+        "inflect": _de,
+        "nouns": _g("m", """
+            arsch depp idiot trottel penner wichser vollidiot mistkerl bloedmann
+            dreck mist schrott furz kackhaufen hosenscheisser schwachkopf dummkopf
+            hohlkopf pisser saftsack sack lump schuft hornochse esel affe lappen
+            pfosten honk lauch kasper clown spinner schmarotzer schleimer
+            arschkriecher wurm kotzbrocken scheisskerl drecksack mistkaefer stinker
+            muell pfusch rotz popel pickel schwanz pimmel grosskotz warmduscher
+            dreckspatz schmutzfink stinkstiefel miesepeter korinthenkacker
+            klugscheisser erbsenzaehler pfuscher stuemper versager nichtsnutz
+            taugenichts faulpelz schnorrer furzknoten blindgaenger rohrkrepierer
+            sauhaufen saustall misthaufen schweinestall scheisshaufen
+        """) + _g("f", """
+            scheisse kacke sau drecksau pisse kotze kackwurst nervensaege pfeife
+            flasche niete kroete ratte wanze zecke laus kakerlake pest seuche
+            pfuscherei sauerei schweinerei schande gurke kruecke bruchbude absteige
+            muellhalde kloake jauche bruehe schmiere flitzpiepe dumpfbacke
+            arschgeige pissnelke hackfresse furzkanone schnapsdrossel kloschuessel
+            schnarchnase transuse heulsuse labertasche quasselstrippe tranfunzel
+            schlafmuetze pottsau kackbratze
+        """) + _g("n", """
+            arschloch miststueck dreckstueck ekel schwein rindvieh ferkel kamel
+            loch klo scheisshaus pissoir wrack elend desaster chaos weichei gesocks
+            pack gesindel mistvieh stinktier faultier dreckloch arschgesicht
+            sackgesicht schlitzohr grossmaul plappermaul schandmaul luder aas biest
+            scheusal pissbecken rattenloch drecksnest kaff
+        """),
+        "adjs": """
+            bloed doof dumm bescheuert beknackt behaemmert bekloppt verbloedet
+            versifft verkackt verschissen beschissen verpisst vermurkst verhunzt
+            versaut verlaust verlottert verranzt ranzig vergammelt verschimmelt
+            schimmelig stinkig stinkend eklig widerlich ekelhaft dreckig schmierig
+            schleimig klebrig verdammt verflucht verfickt mies lausig schaebig
+            marode morsch rostig wackelig schief krumm lahm faul traege nutzlos
+            sinnlos hirnlos ahnungslos planlos kopflos besoffen breit zugedroehnt
+            bekifft verkatert verpeilt verwirrt verstrahlt durchgeknallt irre
+            gestoert krank uebel fies gemein hinterhaeltig mickrig popelig
+            labberig schlapp schlaff fett speckig verfilzt zottelig lumpig
+            abgefuckt abgewrackt abgenutzt ausgeleiert verbeult zerknittert
+            zerfleddert muffig modrig faulig verrottet verkommen verdorben oede
+            kaputt zerbrochen verbogen verkorkst vergurkt versemmelt verbockt
+            vergeigt angeschimmelt abgestanden versumpft verschnarcht verpennt
+            verlogen verpfuscht schrottreif peinlich erbaermlich jaemmerlich
+            armselig klaeglich laecherlich schwachsinnig saudumm strunzdumm
+            stockbesoffen
+        """.split(),
+    },
+    "nap": {
+        "order": "noun-adj",
+        "nouns": _g("m", """
+            strunzo cesso scemo fesso cafone mammalucco uallarone cacasotto
+            chiachiello piezzemmerda pallista pereto paccaro scugnizzo guaglione
+            pernacchio scazzamauriello lazzaro mariuolo cetrulo babbasone ciuccio
+            puorco scarrafone suriciello perucchio chiattillo cuorno curnuto guappo
+            pulecenella cazzaro nciucio casino jettatore tamarro
+        """) + _g("f", """
+            loffa cacata zella munnezza uallera cazzimma sfaccimma fessaria
+            strunzata pucchiacca chiavica ammuina papocchia ciofeca pettola mappina
+            fetenzia schifezza zuzzimma mazzata cofecchia jella cucuzza capatosta
+            mmerda nzogna puzza
+        """),
+        "adjs": """
+            fetente zuzzuso/zuzzosa nzevuso/nzevosa stunato chiatto
+            stuorto/storta cecato scurnacchiato cazzimmuso/cazzimmosa sfasulato
+            scassato sfrantummato ammaccato smerzato scuncecato scumbinato
+            sciancato zelluso/zellosa muccuso/muccosa rugnuso/rugnosa
+            spuorco/sporca pezzente malamente mbriaco nfame
+            abbuffato ntussecato nguaiato ncazzato sfastidiato allummato sfunnato
+            stracquato arraggiato ammusciato ammuffuto scurdato scamazzato spennato
+            nzallanuto ntrunato sfurtunato lurdo/lorda cuotto/cotta muorto/morta
+            sguarrato
+        """.split(),
+    },
 }
 
 _SPLIT = re.compile(r"[A-Z]+(?=[A-Z][a-z])|[A-Z]?[a-z]+|[A-Z]+|\d+")
@@ -208,9 +352,11 @@ class NameForge:
     def _phrase(self, n_words: int) -> list[str]:
         v = self.rng.choice(self.vocabs)
         noun, gender = self.rng.choice(v["nouns"])
-        adjs = self.rng.sample(v["adjs"], k=max(1, n_words - 1))
-        if gender == "f":
-            adjs = [a[:-1] + "a" if a.endswith("o") else a for a in adjs]
+        pool = [a for a in v["adjs"] if a.split("/")[0] != noun]   # no "sfigatoSfigato"
+        adjs = self.rng.sample(pool, k=max(1, n_words - 1))
+        inflect = v.get("inflect", _o_to_a)
+        adjs = [(a.split("/")[gender == "f"] if "/" in a else inflect(a, gender))
+                for a in adjs]
         return [noun, *adjs] if v["order"] == "noun-adj" else [*adjs, noun]
 
     def forge(self, original: str, lower_default: str = "camel") -> str:
