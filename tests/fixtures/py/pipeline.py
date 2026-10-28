@@ -19,7 +19,7 @@ class DataPipeline:
         return len(self._rows)
 
     def summary(self):
-        started_at = datetime.now() - timedelta(minutes=5)
+        started_at = datetime(2024, 1, 1, 12, 0) - timedelta(minutes=5)
         return f"{self.source_name}: {len(self._rows)} rows since {started_at:%H:%M}"
 
 
